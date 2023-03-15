@@ -2,6 +2,7 @@ package group.g22.demostore.service;
 
 import group.g22.demostore.model.Employee;
 import group.g22.demostore.repository.EmployeeRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,7 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+    public Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, @NotNull String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending():Sort.by(sortField).descending();
         Pageable pageable = PageRequest.of(pageNo-1, pageSize, sort);
         return this.employeeRepository.findAll(pageable);
