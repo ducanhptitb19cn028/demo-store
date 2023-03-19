@@ -1,7 +1,8 @@
-package group.g22.demostore.service;
+package group.g22.demostore.service.impl;
 
 import group.g22.demostore.model.Employee;
 import group.g22.demostore.repository.EmployeeRepository;
+import group.g22.demostore.service.EmployeeService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
     @Override
