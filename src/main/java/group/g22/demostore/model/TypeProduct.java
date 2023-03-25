@@ -25,7 +25,7 @@ public class TypeProduct {
     private String typeProductName;
 
     @Column(name = "type_product_status")
-    private String typeProductStatus;
+    private Integer typeProductStatus;
 
     @Column(name = "create_date")
     private LocalDateTime createDate;

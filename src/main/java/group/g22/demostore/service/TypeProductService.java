@@ -6,4 +6,12 @@ import org.springframework.data.domain.Pageable;
 
 public interface TypeProductService {
     Page<TypeProduct> search(Pageable pageable);
+
+    String save(TypeProduct typeProduct);
+
+    void delete(Long id);
+
+    TypeProduct detail(Long id);
+
+    String update(TypeProduct typeProduct);
 }

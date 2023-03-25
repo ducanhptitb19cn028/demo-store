@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Personnel Management System</title>
+    <link th:href="@{css/main.css}" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" th:src="@{js/main.js}" ></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:include="~{header.html}"></div>
+<div class="container">
+    <h1>Type Product Management System</h1>
+    <hr>
+    <h2>Update Type Product</h2>
+    <form action="#" th:action="@{/type-product/save}" th:object="${typeProduct}" method="post" align="left">
+        <input type="hidden" th:field="*{typeProductId}"/>
+
+        <div>
+            <label>Type Product Code: </label>
+            <label>
+                <input type="text" th:field="*{typeProductCode}" placeholder="Type Product Code" class="form-control mb-4 col-4">
+            </label>
+        </div>
+
+        <div>
+            <label>Type Product Name: </label>
+            <label>
+                <input type="text" th:field="*{typeProductName}" placeholder="Type Product Name" class="form-control mb-4 col-4">
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label>Type Product Status: </label>
+            <div th:each="option : ${T(group.g22.demostore.enums.TypeProductStatusOption).values()}">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" th:field="*{typeProductStatus}" th:value="${option.getValue()}" class="custom-control-input">
+                    <label class="custom-control-label" th:for="${#ids.prev('typeProductStatus')}" th:text="${option.getName()}">option</label>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <a th:href="@{/type-product/{id}(id=*{typeProductId})}" class="btn btn-primary">Go back</a>
+
+            <button type="submit"class="btn btn-info col-2">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
