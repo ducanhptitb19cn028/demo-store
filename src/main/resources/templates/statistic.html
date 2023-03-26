@@ -12,8 +12,25 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div th:include="header.html"></div>
+<div th:insert="header.html"></div>
+<div class="container my-2" align="center">
 
-</nav>
+    <h1 align="center">Chức năng thống kê 123</h1><br><br><br>
+    <div>
+        <a th:href="@{/invoice/add-invoice}" class="btn btn-primary col-4">Tạo hoá đơn</a>
+    </div>
+    <br>
+    <div>
+        <a th:href="@{/get-invoice}" class="btn btn-primary col-4">Xem hoá đơn</a>
+    </div>
+    </br>
+    <div>
+        <a th:href="@{/money-statistic}" class="btn btn-primary col-4">Thống kê doanh thu, lợi nhuận</a>
+    </div>
+    </br>
+    <div>
+        <a th:href="@{/product-statistic}" class="btn btn-primary col-4">Thống kê sản phẩm bán chạy</a>
+    </div>
+</div>
 </body>
 </html>

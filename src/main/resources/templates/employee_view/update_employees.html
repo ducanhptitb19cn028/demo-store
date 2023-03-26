@@ -34,16 +34,19 @@
                 <label>Gender: </label>
                 <div th:each="option : ${T(group.g22.demostore.enums.GenderOption).values()}">
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" th:field="*{genderOption}" th:value="${option}" class="custom-control-input">
+                        <input type="radio" th:field="*{genderOption}" th:value="${option}"
+                               class="custom-control-input">
                         <label class="custom-control-label" th:for="${#ids.prev('genderOption')}" th:text="${option}">option</label>
                     </div>
                 </div>
-            </div><br>
+            </div>
+            <br>
             <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4">
             <div>
                 <label>Date of birth:</label>
                 <input type="date" th:field="*{dob}" placeholder="Date of birth" class="yyyy-MM-dd">
-            </div><br>
+            </div>
+            <br>
             <div>
                 <label>Address: </label>
                 <input type="text" th:field="*{address}" placeholder="Address" class="form-control mb-4 col-4">
@@ -54,17 +57,22 @@
             </div>
             <div class="form-group">
                 <label>Choose people group:</label><br>
-                <select th:field="*{peopleOption}" id="peopleOption" onfocus='this.size=6;' onblur='this.size=0;' onchange='this.size=1; this.blur();'>
-                    <option value="" >People option</option>
+                <select th:field="*{peopleOption}" id="peopleOption" onfocus='this.size=6;' onblur='this.size=0;'
+                        onchange='this.size=1; this.blur();'>
+                    <option value="">People option</option>
                     <option th:each="people :  ${T(group.g22.demostore.enums.PeopleOption).values()}"
-                            th:value="${people}" th:text="${people}">option</option>
+                            th:value="${people}" th:text="${people}">option
+                    </option>
                 </select>
-            </div><br>
+            </div>
+            <br>
             <div class="col-md-4">
                 <label th:for="*{images}">Select image:</label>
-                <input type="file" th:field="*{images}" name="image" accept="image/*" class="form-control-file" onchange="loadFile(event)">
-                <img id="output" />
-            </div><br>
+                <input type="file" th:field="*{images}" name="image" accept="image/*" class="form-control-file"
+                       onchange="loadFile(event)">
+                <img id="output"/>
+            </div>
+            <br>
 
             <button type="submit" class="btn btn-info col-2">Update</button>
         </form>

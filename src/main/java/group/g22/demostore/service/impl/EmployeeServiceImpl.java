@@ -18,8 +18,9 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
+
     @Override
-    public List<Employee> getAllEmployees(){
+    public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
@@ -32,15 +33,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeebyId(long Id) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(Id);
         Employee employee;
-        if (optionalEmployee.isPresent()){
+        if (optionalEmployee.isPresent()) {
             employee = optionalEmployee.get();
-        }
-        else {
-            throw new RuntimeException("Employee not found for id:"+ Id);
+        } else {
+            throw new RuntimeException("Employee not found for id:" + Id);
         }
         return employee;
     }
-
 
 
     @Override
@@ -50,8 +49,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Page<Employee> findPaginated(int pageNo, int pageSize, String sortField, @NotNull String sortDirection) {
-        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending():Sort.by(sortField).descending();
-        Pageable pageable = PageRequest.of(pageNo-1, pageSize, sort);
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.employeeRepository.findAll(pageable);
     }
 }

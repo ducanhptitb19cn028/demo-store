@@ -35,6 +35,22 @@
         </div>
 
         <div>
+            <label>Import Price: </label>
+            <label>
+                <span type="text" th:text="*{importPrice}" placeholder="Type Product Name"
+                      class="form-control mb-4 col-4"/>
+            </label>
+        </div>
+
+        <div>
+            <label>Selling Price: </label>
+            <label>
+                <span type="text" th:text="*{sellingPrice}" placeholder="Type Product Name"
+                      class="form-control mb-4 col-4"/>
+            </label>
+        </div>
+
+        <div>
             <label>Type Product Status: </label>
             <label>
                 <span type="text" th:text="${typeProductStatus}" placeholder="Type Product Name"
