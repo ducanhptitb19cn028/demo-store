@@ -1,6 +1,7 @@
 package group.g22.demostore.service.impl;
 
 import group.g22.demostore.enums.TypeProductStatusOption;
+import group.g22.demostore.model.Employee;
 import group.g22.demostore.model.TypeProduct;
 import group.g22.demostore.repository.TypeProductRepository;
 import group.g22.demostore.service.TypeProductService;
@@ -10,11 +11,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TypeProductImpl implements TypeProductService {
     @Autowired
     private TypeProductRepository typeProductRepository;
+
+
+    @Override
+    public List<TypeProduct> findAll() {
+        return typeProductRepository.findAll();
+    }
 
     @Override
     public Page<TypeProduct> search(Pageable pageable) {
@@ -62,5 +71,17 @@ public class TypeProductImpl implements TypeProductService {
 
         typeProductRepository.save(typeProductUpdate);
         return "Update success";
+    }
+
+    @Override
+    public TypeProduct getTypeProductById(long id) {
+        Optional<TypeProduct> optionalTypeProduct = typeProductRepository.findById(id);
+        TypeProduct typeProduct;
+        if (optionalTypeProduct.isPresent()) {
+            typeProduct = optionalTypeProduct.get();
+        } else {
+            throw new RuntimeException("Employee not found for id:" + id);
+        }
+        return typeProduct;
     }
 }

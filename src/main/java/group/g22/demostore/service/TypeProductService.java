@@ -4,7 +4,10 @@ import group.g22.demostore.model.TypeProduct;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface TypeProductService {
+    List<TypeProduct> findAll();
     Page<TypeProduct> search(Pageable pageable);
 
     String save(TypeProduct typeProduct);
@@ -14,4 +17,6 @@ public interface TypeProductService {
     TypeProduct detail(Long id);
 
     String update(TypeProduct typeProduct);
+
+    TypeProduct getTypeProductById(long id);
 }

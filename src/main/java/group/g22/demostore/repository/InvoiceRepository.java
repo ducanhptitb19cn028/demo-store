@@ -1,9 +1,9 @@
 package group.g22.demostore.repository;
 
-import group.g22.demostore.model.Employee;
+import group.g22.demostore.model.Invoice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 }
