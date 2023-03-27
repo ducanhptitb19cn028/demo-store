@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Personnel Management System</title>
+    <link th:href="@{css/main.css}" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" th:src="@{js/main.js}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:include="header.html"></div>
+<div class="container">
+    <h1>Tạo hoá đơn</h1>
+    <hr>
+    <h2>Nhập số lượng cho từng sản phẩm</h2>
+    <form action="#" th:action="@{/invoice/save}" th:object="${listTypeProduct}" method="post" align="left">
+        <div>
+            <table border="1" class="table table-striped table-responsive-md">
+                <thead>
+                <th>Type Product Code</th>
+                <th>Type Product Name</th>
+                <th>Selling Price</th>
+                <th>Quantity</th>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${listTypeProduct}">
+                    <td th:text="${product.typeProductCode}"></td>
+                    <td th:text="${product.typeProductName}"></td>
+                    <td th:text="${product.sellingPrice}"></td>
+                    <td><input type="number" th:name="${product.typeProductId}" th:value="0"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <a href="javascript:history.back()" class="btn btn-primary">Go back</a>
+
+            <button type="submit" class="btn btn-info col-2">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
