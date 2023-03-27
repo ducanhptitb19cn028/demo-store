@@ -14,8 +14,22 @@
 <body>
 <div th:insert="header.html"></div>
 <div class="container my-2">
+    <div th:if="${result.containsKey('date')}">
+        <h1 align="center">Bảng danh sách hoá đơn được thống kê trong ngày
+            <td th:text="${result['date']}">
+        </h1>
+        <br><br><br>
+    </div>
+    <div th:if="${!result.containsKey('date')}" align="center">
+        <h1>Bảng danh sách hoá đơn được thống kê từ ngày
+            <td th:text="${result['start']}">
+        </h1>
+        <h1>tới ngày
+            <td th:text="${result['end']}">
+        </h1>
+        <br><br><br>
+    </div>
 
-    <h1 align="center">Bảng danh sách hoá đơn</h1><br><br><br>
     <table border="1" class="table table-striped table-responsive-md">
         <thead>
         <th>Invoice Id</th>
@@ -24,13 +38,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="invoice : ${invoices}">
+        <tr th:each="invoice : ${result['invoices']}">
             <td><a th:href="@{/invoice/detail-invoice/{id}(id=${invoice.id})}" th:text="${invoice.id}"></a>
             <td th:text="${invoice.createDate}"></td>
             <td th:text="${invoice.totalAmount}"></td>
         </tr>
         </tbody>
     </table>
+    <div>
+        Total Amount All:
+        <td th:text="${result['totalAmountAll']}"></td>
+    </div>
     <div>
         <a th:href="@{/invoice/add-invoice}" class="btn btn-primary">Tạo hoá đơn</a>
         <a th:href="@{/statistic}" class="btn btn-primary">Go back</a>

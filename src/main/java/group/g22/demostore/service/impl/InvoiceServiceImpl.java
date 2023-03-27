@@ -7,7 +7,9 @@ import group.g22.demostore.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -36,4 +38,15 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
         return invoice;
     }
+
+    @Override
+    public List<Invoice> findByDate(LocalDate date) {
+        return invoiceRepository.findAllByCreateDateEquals(date);
+    }
+
+    @Override
+    public List<Invoice> findByDateRange(LocalDate start, LocalDate end) {
+        return invoiceRepository.findAllByCreateDateBetween(start, end);
+    }
+
 }
