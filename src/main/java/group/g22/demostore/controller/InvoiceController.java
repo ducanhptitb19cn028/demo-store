@@ -1,5 +1,6 @@
 package group.g22.demostore.controller;
 
+import group.g22.demostore.handler.HandlerInvoice;
 import group.g22.demostore.model.Invoice;
 import group.g22.demostore.model.TypeProduct;
 import group.g22.demostore.service.InvoiceService;
@@ -9,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +22,9 @@ public class InvoiceController {
     @Autowired
     TypeProductService typeProductService;
 
+    @Autowired
+    HandlerInvoice handlerInvoice;
+
     @GetMapping("/add-invoice")
     public String createInvoice(Model model) {
         List<TypeProduct> typeProductList = typeProductService.findAll();
@@ -33,31 +34,21 @@ public class InvoiceController {
 
     @PostMapping("/save")
     public String saveInvoice(Model model, @RequestParam Map<String, String> params) {
-        Invoice invoice = new Invoice();
-        List<TypeProduct> products = new ArrayList<>();
-        Map<TypeProduct, Integer> productQuantities = new HashMap<>();
-        try {
-            for (String productId : params.keySet()) {
-                Integer quantity = Integer.parseInt(params.get(productId));
-                if (quantity > 0) {
-                    TypeProduct typeProduct = typeProductService.getTypeProductById(Long.parseLong(productId));
-                    products.add(typeProduct);
-                    productQuantities.put(typeProduct, quantity);
-                }
-            }
-        } catch (Exception e) {
-
-        }
-
-        double totalAmount = 0;
-        for (TypeProduct product : productQuantities.keySet()) {
-            totalAmount += product.getSellingPrice() * productQuantities.get(product);
-        }
-            invoice.setCreateDate(LocalDateTime.now());
-        invoice.setProducts(products);
-        invoice.setProductQuantities(productQuantities);
-        invoice.setTotalAmount(totalAmount);
+        Invoice invoice = handlerInvoice.createInvoice(params);
         invoiceService.save(invoice);
+        model.addAttribute("invoice", invoice);
+        return "invoice_view/create_success";
+    }
+
+    @GetMapping("/get-invoices")
+    public String getInvoices(Model model) {
+        model.addAttribute("invoices", invoiceService.findAll());
+        return "invoice_view/invoices";
+    }
+
+    @GetMapping("detail-invoice/{id}")
+    public String getInvoice(@PathVariable(value = "id") long id, Model model) {
+        Invoice invoice = invoiceService.getInvoiceById(id);
         model.addAttribute("invoice", invoice);
         return "invoice_view/detail_invoice";
     }

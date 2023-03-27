@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class Invoice {
     private Long id;
 
     @Column(name = "create_date")
-    private LocalDateTime createDate;
+    private LocalDate createDate;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "invoice_products", joinColumns = @JoinColumn(name = "invoice_id"),
