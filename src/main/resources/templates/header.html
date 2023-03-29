@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{css/main.css}" rel="stylesheet" type="text/css"/>
@@ -30,6 +30,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Salary Rank</a>
                 </li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/?logout}">Logout</a></li>
+
             </ul>
         </div>
     </div>
