@@ -33,4 +33,10 @@ public class TypeProduct {
 
     @Column(name = "stop_date")
     private LocalDateTime stopDate;
+
+    @Column(name = "import_price")
+    private Double importPrice;
+
+    @Column(name = "selling_price")
+    private Double sellingPrice;
 }

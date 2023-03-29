@@ -14,11 +14,13 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+
     // display list of employees
     @GetMapping("/employee")
     public String viewEmployeepage(Model model) {
-        return  findPaginated(1,"firstName","asc",model);
+        return findPaginated(1, "firstName", "asc", model);
     }
+
     @GetMapping("/newEmployeesForm")
     public String newEmployeesForm(Model model) {
         // create a new employee
@@ -26,26 +28,30 @@ public class EmployeeController {
         model.addAttribute("employee", employee);
         return "employee_view/new_employees";
     }
+
     @PostMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee){
+    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
         // save the employee to database
         employeeService.insertEmployee(employee);
         return "redirect:/employee";
     }
+
     @GetMapping("/showFormupdate/{id}")
-    public String showFormupdate(@PathVariable(value = "id") long id, Model model){
+    public String showFormUpdate(@PathVariable(value = "id") long id, Model model) {
         // get employee from service by id to update
         Employee employee = employeeService.getEmployeebyId(id);
-        model.addAttribute("employee",employee);
+        model.addAttribute("employee", employee);
         return "employee_view/update_employees";
     }
+
     @GetMapping("/deleteEmplyee/{id}")
-    public String deleteEmployee(@PathVariable(value = "id") long id){
+    public String deleteEmployee(@PathVariable(value = "id") long id) {
         this.employeeService.deleteEmployee(id);
         return "redirect:/employee";
     }
+
     @GetMapping("/page/{pageNo}")
-    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
                                 @RequestParam("sortField") String sortField,
                                 @RequestParam("sortDir") String sortDir,
                                 Model model) {

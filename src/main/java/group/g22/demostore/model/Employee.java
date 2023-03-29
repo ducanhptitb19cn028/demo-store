@@ -32,6 +32,7 @@ public class Employee {
     @Column(name = "identity_no")
     private String identityno;
     private String images;
+
     public Employee() {
 
     }
