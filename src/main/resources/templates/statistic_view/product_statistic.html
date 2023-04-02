@@ -14,32 +14,72 @@
 <body>
 <div th:insert="header.html"></div>
 <div class="container my-2">
-    <div th:if="${!result.containsKey('date')}" align="center">
-        <h1>Danh sách số lượng sản phẩm bán ra
-        </h1>
+    <h1>Danh sách số lượng sản phẩm bán ra</h1>
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <th>
+            <a th:href="@{'/statistic/pt/page/' + ${currentPage} + '?sortField=typeProductId&sortDir=' + ${reverseSortDir}}">Type
+                Product Id
+            </a></th>
+        <th>
+            <a th:href="@{'/statistic/pt/page/' + ${currentPage} + '?sortField=typeProductName&sortDir=' + ${reverseSortDir}}">Type
+                Product Name
+            </a></th>
+        <th>
+            <a th:href="@{'/statistic/pt/page/' + ${currentPage} + '?sortField=sellingPrice&sortDir='  + ${reverseSortDir}}">Selling
+                Price</a></th>
+        <th>
+            <a th:href="@{'/statistic/pt/page/'+ ${currentPage} + '?sortField=sellNumber&sortDir=' + ${reverseSortDir}}">Sell
+                Number</a>
+        </th>
+        <th>
+            <a th:href="@{'/statistic/pt/page/'+ ${currentPage} + '?sortField=totalRevenue&sortDir=' + ${reverseSortDir}}">Total Revenue</a>
+        </th>
+        </tr>
+        </thead>
+        <thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.typeProductId}"></td>
+            <td th:text="${product.typeProductName}"></td>
+            <td th:text="${product.sellingPrice}"></td>
+            <td th:text="${product.sellNumber}"></td>
+            <td th:text="${product.totalRevenue}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${totalPages > 1}">
+        <div class="row col-sm-12">
+            <div class="col-sm-9">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}"
+                           th:href="@{'/statistic/pt/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+            </div>
 
-        <table border="1" class="table table-striped table-responsive-md">
-            <thead>
-            <th>Type Product Id</th>
-            <th>Type Product Name</th>
-            <th>Quantity</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="invoice : ${result}">
-                <td><a th:href="@{/invoice/detail-invoice/{id}(id=${invoice.getKey().getTypeProductId()})}" th:text="${invoice.getKey().getTypeProductId()}"></a>
-                <td th:text="${invoice.getKey().typeProductName}"></td>
-                <td th:text="${invoice.getValue()}"></td>
-            </tr>
-            </tbody>
-        </table>
-<!--        <div align="right">-->
-<!--            Total Quantity:-->
-<!--            <td th:text="${result['totalAmountAll']}"></td>-->
-<!--        </div>-->
-        <div>
-            <a th:href="@{/statistic}" class="btn btn-primary">Go back</a>
+            <div class="align-self-center">
+                <a th:if="${currentPage > 1}"
+                   th:href="@{'/statistic/pt/page/' + ${totalPages - totalPages + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Top</a>
+                <span th:unless="${currentPage > 1}">Top</span>
+
+                <a th:if="${currentPage > 1}"
+                   th:href="@{'/statistic/pt/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+                <span th:unless="${currentPage > 1}">Previous</span>
+
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/statistic/pt/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/statistic/pt/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
         </div>
     </div>
+    <div>
+        <a th:href="@{/statistic}" class="btn btn-primary">Go back</a>
+    </div>
+</div>
 </body>
 </html>

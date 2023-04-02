@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 @Data
@@ -22,11 +21,6 @@ public class Invoice {
 
     @Column(name = "create_date")
     private LocalDate createDate;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "invoice_products", joinColumns = @JoinColumn(name = "invoice_id"),
-            inverseJoinColumns = @JoinColumn(name = "type_product_id"))
-    private List<TypeProduct> products;
 
     @ElementCollection
     @CollectionTable(name = "invoice_product_quantities", joinColumns = @JoinColumn(name = "invoice_id"))
