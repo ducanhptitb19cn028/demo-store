@@ -39,4 +39,10 @@ public class TypeProduct {
 
     @Column(name = "selling_price")
     private Double sellingPrice;
+
+    @Column(name= "sell_number")
+    private Integer sellNumber = 0;
+
+    @Column(name= "total_revenue")
+    private Double totalRevenue = 0.0;
 }

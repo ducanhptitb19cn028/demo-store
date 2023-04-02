@@ -31,7 +31,7 @@
                     <td th:text="${product.typeProductCode}"></td>
                     <td th:text="${product.typeProductName}"></td>
                     <td th:text="${product.sellingPrice}"></td>
-                    <td><input type="number" th:name="${product.typeProductId}" th:value="0"></td>
+                    <td><input type="number" th:name="'pId.' + ${product.typeProductId} " th:value="0"></td>
                 </tr>
                 </tbody>
             </table>

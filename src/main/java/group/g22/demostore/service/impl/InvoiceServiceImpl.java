@@ -3,19 +3,28 @@ package group.g22.demostore.service.impl;
 import group.g22.demostore.model.Invoice;
 import group.g22.demostore.model.TypeProduct;
 import group.g22.demostore.repository.InvoiceRepository;
+import group.g22.demostore.repository.TypeProductRepository;
 import group.g22.demostore.service.InvoiceService;
+import group.g22.demostore.service.TypeProductService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
     @Autowired
     private InvoiceRepository invoiceRepository;
+
+    @Autowired
+    private TypeProductRepository typeProductRepository;
 
     @Override
     public void save(Invoice invoice) {
@@ -49,4 +58,17 @@ public class InvoiceServiceImpl implements InvoiceService {
         return invoiceRepository.findAllByCreateDateBetween(start, end);
     }
 
+    @Override
+    public Page<Invoice> findPaginated(int pageNo, int pageSize, String sortField, @NotNull String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.invoiceRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<TypeProduct> findPaginatedPt(int pageNo, int pageSize, String sortField, @NotNull String sortDir) {
+            Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.typeProductRepository.findAll(pageable);
+    }
 }

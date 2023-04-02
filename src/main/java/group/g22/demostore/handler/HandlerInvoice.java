@@ -29,25 +29,31 @@ public class HandlerInvoice {
         Invoice invoice = new Invoice();
         List<TypeProduct> products = new ArrayList<>();
         Map<TypeProduct, Integer> productQuantities = new HashMap<>();
+        double totalAmount = 0;
         try {
-            for (String productId : params.keySet()) {
-                Integer quantity = Integer.parseInt(params.get(productId));
-                if (quantity > 0) {
-                    TypeProduct typeProduct = typeProductService.getTypeProductById(Long.parseLong(productId));
-                    products.add(typeProduct);
-                    productQuantities.put(typeProduct, quantity);
+            for (String pId : params.keySet()) {
+                if (pId.contains("pId.")) {
+                    Long productId = Long.parseLong(pId.substring(4));
+                    Integer quantity = Integer.parseInt(params.get(pId));
+                    if (quantity > 0) {
+                        TypeProduct typeProduct = typeProductService.getTypeProductById(productId);
+                        double amount = typeProduct.getSellingPrice() * quantity;
+                        totalAmount += amount;
+                        typeProduct.setTotalRevenue(typeProduct.getTotalRevenue() + amount);
+                        typeProduct.setSellNumber(typeProduct.getSellNumber() + quantity);
+                        typeProductService.update(typeProduct);
+                        productQuantities.put(typeProduct, quantity);
+                    }
                 }
             }
         } catch (Exception e) {
 
         }
 
-        double totalAmount = 0;
-        for (TypeProduct product : productQuantities.keySet()) {
-            totalAmount += product.getSellingPrice() * productQuantities.get(product);
-        }
+//        for (TypeProduct product : productQuantities.keySet()) {
+//            totalAmount += product.getSellingPrice() * productQuantities.get(product);
+//        }
         invoice.setCreateDate(LocalDate.now());
-        invoice.setProducts(products);
         invoice.setProductQuantities(productQuantities);
         invoice.setTotalAmount(totalAmount);
 
