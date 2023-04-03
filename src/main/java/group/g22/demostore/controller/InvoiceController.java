@@ -2,9 +2,9 @@ package group.g22.demostore.controller;
 
 import group.g22.demostore.handler.HandlerInvoice;
 import group.g22.demostore.model.Invoice;
-import group.g22.demostore.model.TypeProduct;
+import group.g22.demostore.model.Product;
 import group.g22.demostore.service.InvoiceService;
-import group.g22.demostore.service.TypeProductService;
+import group.g22.demostore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -21,15 +21,15 @@ public class InvoiceController {
     private InvoiceService invoiceService;
 
     @Autowired
-    TypeProductService typeProductService;
+    ProductService productService;
 
     @Autowired
     HandlerInvoice handlerInvoice;
 
     @GetMapping("/add-invoice")
     public String createInvoice(Model model) {
-        List<TypeProduct> typeProductList = typeProductService.findAll();
-        model.addAttribute("listTypeProduct", typeProductList);
+        List<Product> productList = productService.findAll();
+        model.addAttribute("listProduct", productList);
         return "invoice_view/new_invoice";
     }
 

@@ -50,8 +50,8 @@
       </thead>
       <tbody>
       <tr th:each="product : ${invoice.productQuantities}">
-        <td th:text="${product.key.typeProductId}"></td>
-        <td th:text="${product.key.typeProductName}"></td>
+        <td th:text="${product.key.productId}"></td>
+        <td th:text="${product.key.productName}"></td>
         <td th:text="${product.key.sellingPrice}"></td>
         <td th:text="${product.value}"></td>
       </tr>
