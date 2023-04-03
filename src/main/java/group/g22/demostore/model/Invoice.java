@@ -26,7 +26,7 @@ public class Invoice {
     @CollectionTable(name = "invoice_product_quantities", joinColumns = @JoinColumn(name = "invoice_id"))
     @MapKeyJoinColumn(name = "product_id")
     @Column(name = "quantity")
-    private Map<TypeProduct, Integer> productQuantities;
+    private Map<Product, Integer> productQuantities;
 
     @Column(name = "total_Amount")
     private double totalAmount;

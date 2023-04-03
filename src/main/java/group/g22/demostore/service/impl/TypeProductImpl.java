@@ -19,12 +19,6 @@ public class TypeProductImpl implements TypeProductService {
     @Autowired
     private TypeProductRepository typeProductRepository;
 
-
-    @Override
-    public List<TypeProduct> findAll() {
-        return typeProductRepository.findAll();
-    }
-
     @Override
     public Page<TypeProduct> search(Pageable pageable) {
         return typeProductRepository.search(pageable);
@@ -73,15 +67,4 @@ public class TypeProductImpl implements TypeProductService {
         return "Update success";
     }
 
-    @Override
-    public TypeProduct getTypeProductById(long id) {
-        Optional<TypeProduct> optionalTypeProduct = typeProductRepository.findById(id);
-        TypeProduct typeProduct;
-        if (optionalTypeProduct.isPresent()) {
-            typeProduct = optionalTypeProduct.get();
-        } else {
-            throw new RuntimeException("Employee not found for id:" + id);
-        }
-        return typeProduct;
-    }
 }

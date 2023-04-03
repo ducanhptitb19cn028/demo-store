@@ -20,14 +20,14 @@
     <div>
         <label>Invoice ID: </label>
         <label>
-                <span type="text" th:text="*{id}" placeholder="Type Product Code"
+                <span type="text" th:text="*{id}" placeholder="Product Code"
                       class="form-control mb-4 col-4"/>
         </label>
     </div>
     <div>
         <label>Create Date: </label>
         <label>
-                <span type="text" th:text="*{createDate}" placeholder="Type Product Code"
+                <span type="text" th:text="*{createDate}" placeholder="Product Code"
                       class="form-control mb-4 col-4"/>
         </label>
     </div>
@@ -42,8 +42,8 @@
             </thead>
             <tbody>
             <tr th:each="product : ${invoice.productQuantities}">
-                <td th:text="${product.key.typeProductId}"></td>
-                <td th:text="${product.key.typeProductName}"></td>
+                <td th:text="${product.key.productId}"></td>
+                <td th:text="${product.key.productName}"></td>
                 <td th:text="${product.key.sellingPrice}"></td>
                 <td th:text="${product.value}"></td>
             </tr>

@@ -3,9 +3,9 @@ package group.g22.demostore.handler;
 import group.g22.demostore.constant.Constant;
 import group.g22.demostore.helper.ConversionHelper;
 import group.g22.demostore.model.Invoice;
-import group.g22.demostore.model.TypeProduct;
+import group.g22.demostore.model.Product;
 import group.g22.demostore.service.InvoiceService;
-import group.g22.demostore.service.TypeProductService;
+import group.g22.demostore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Service
 public class HandlerInvoice {
     @Autowired
-    TypeProductService typeProductService;
+    ProductService productService;
 
     @Autowired
     InvoiceService invoiceService;
@@ -27,8 +27,8 @@ public class HandlerInvoice {
     // TODO thêm validate, page, sort
     public Invoice createInvoice(Map<String, String> params) {
         Invoice invoice = new Invoice();
-        List<TypeProduct> products = new ArrayList<>();
-        Map<TypeProduct, Integer> productQuantities = new HashMap<>();
+        List<Product> products = new ArrayList<>();
+        Map<Product, Integer> productQuantities = new HashMap<>();
         double totalAmount = 0;
         try {
             for (String pId : params.keySet()) {
@@ -36,13 +36,13 @@ public class HandlerInvoice {
                     Long productId = Long.parseLong(pId.substring(4));
                     Integer quantity = Integer.parseInt(params.get(pId));
                     if (quantity > 0) {
-                        TypeProduct typeProduct = typeProductService.getTypeProductById(productId);
-                        double amount = typeProduct.getSellingPrice() * quantity;
+                        Product product = productService.getProductById(productId);
+                        double amount = product.getSellingPrice() * quantity;
                         totalAmount += amount;
-                        typeProduct.setTotalRevenue(typeProduct.getTotalRevenue() + amount);
-                        typeProduct.setSellNumber(typeProduct.getSellNumber() + quantity);
-                        typeProductService.update(typeProduct);
-                        productQuantities.put(typeProduct, quantity);
+                        product.setTotalRevenue(product.getTotalRevenue() + amount);
+                        product.setSellNumber(product.getSellNumber() + quantity);
+                        productService.update(product);
+                        productQuantities.put(product, quantity);
                     }
                 }
             }
@@ -85,21 +85,5 @@ public class HandlerInvoice {
         result.put("totalAmountAll", totalAmountAll);
         result.put("invoices", invoices);
         return result;
-    }
-
-    public Map<TypeProduct, Integer> getQuantityProduct() {
-        List<Invoice> invoices = invoiceService.findAll();
-        Map<TypeProduct, Integer> results = new HashMap<>();
-        for (Invoice invoice : invoices) {
-            Map<TypeProduct, Integer> map = invoice.getProductQuantities();
-            for (TypeProduct key : map.keySet()) {
-                if (results.containsKey(key)) {
-                    results.put(key, results.get(key) + map.get(key));
-                } else {
-                    results.put(key, map.get(key));
-                }
-            }
-        }
-        return results;
     }
 }

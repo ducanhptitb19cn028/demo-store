@@ -3,7 +3,7 @@ package group.g22.demostore.controller;
 import group.g22.demostore.constant.Constant;
 import group.g22.demostore.handler.HandlerInvoice;
 import group.g22.demostore.model.Invoice;
-import group.g22.demostore.model.TypeProduct;
+import group.g22.demostore.model.Product;
 import group.g22.demostore.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -98,7 +98,7 @@ public class StatisticController {
 //        Map<TypeProduct, Integer> result = handlerInvoice.getQuantityProduct();
 //        model.addAttribute("result", result);
 //        return "statistic_view/product_statistic";
-        return findPaginatedPt(1, "typeProductId", "asc", model);
+        return findPaginatedPt(1, "productId", "asc", model);
     }
 
     @GetMapping("/pt/page/{pageNo}")
@@ -110,8 +110,8 @@ public class StatisticController {
 //        Map<TypeProduct, Integer> result = handlerInvoice.getQuantityProduct();
 //        model.addAttribute("result", result);
         int pageSize = 5;
-        Page<TypeProduct> page = invoiceService.findPaginatedPt(pageNo, pageSize, sortField, sortDir);
-        List<TypeProduct> products = page.getContent();
+        Page<Product> page = invoiceService.findPaginatedPt(pageNo, pageSize, sortField, sortDir);
+        List<Product> products = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
