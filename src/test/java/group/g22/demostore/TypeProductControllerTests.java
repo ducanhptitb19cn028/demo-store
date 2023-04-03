@@ -2,6 +2,8 @@ package group.g22.demostore;
 
 import group.g22.demostore.controller.TypeProductController;
 import group.g22.demostore.model.TypeProduct;
+import group.g22.demostore.repository.TypeProductRepository;
+import group.g22.demostore.service.TypeProductService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -26,6 +28,9 @@ class TypeProductControllerTests {
 
     @Autowired
     private TypeProductController typeProductController;
+
+    @Autowired
+    private TypeProductRepository typeProductRepository;
 
     private Model model = new Model() {
         @Override
@@ -102,6 +107,43 @@ class TypeProductControllerTests {
         typeProduct.setTypeProductName("Loại hàng hóa 1");
         typeProduct.setTypeProductStatus(1);
         Assert.assertEquals("redirect:/type-product", typeProductController.saveTypeProduct(typeProduct));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void testDelete() {
+        TypeProduct typeProduct = new TypeProduct();
+        typeProduct.setTypeProductCode("LHH1");
+        typeProduct.setTypeProductName("Loại hàng hóa 1");
+        typeProduct.setTypeProductStatus(1);
+        TypeProduct typeProductDelete = typeProductRepository.save(typeProduct);
+        Assert.assertEquals("redirect:/type-product", typeProductController.delete(typeProductDelete.getTypeProductId()));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void testView() {
+        TypeProduct typeProduct = new TypeProduct();
+        typeProduct.setTypeProductCode("LHH1");
+        typeProduct.setTypeProductName("Loại hàng hóa 1");
+        typeProduct.setTypeProductStatus(1);
+        TypeProduct typeProductView = typeProductRepository.save(typeProduct);
+        Assert.assertEquals("/type_product_view/detail", typeProductController.view(typeProductView.getTypeProductId(), model));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    void testUpdate() {
+        TypeProduct typeProduct = new TypeProduct();
+        typeProduct.setTypeProductCode("LHH1");
+        typeProduct.setTypeProductName("Loại hàng hóa 1");
+        typeProduct.setTypeProductStatus(1);
+        TypeProduct typeProductNew = typeProductRepository.save(typeProduct);
+
+        Assert.assertEquals("/type_product_view/update", typeProductController.update(typeProductNew.getTypeProductId(), model));
     }
 
 }
