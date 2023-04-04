@@ -14,24 +14,24 @@
 <body>
 <div th:insert="header.html"></div>
 <div class="container my-2">
-    <div th:if="${result.containsKey('date')}">
+    <div th:if="${option.equals('date')}">
         <h1 align="center">Bảng danh sách hoá đơn được thống kê trong ngày
-            <td th:text="${result['date']}">
+            <td th:text="${specificDate}">
         </h1>
         <br><br><br>
     </div>
-    <div th:if="${!result.containsKey('date')}" align="center">
+    <div th:unless="${option.equals('date')}" align="center">
         <h1>Bảng danh sách hoá đơn được thống kê từ ngày
-            <td th:text="${result['start']}">
+            <td th:text="${fromDate}">
         </h1>
         <h1>tới ngày
-            <td th:text="${result['end']}">
+            <td th:text="${toDate}">
         </h1>
         <br><br><br>
     </div>
     <div>
         Total Amount All:
-        <td th:text="${result['totalAmountAll']}"></td>
+        <td th:text="${totalAmountAll}"></td>
         <table border="1" class="table table-striped table-responsive-md">
             <thead>
             <th><a th:href="@{'/statistic/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}

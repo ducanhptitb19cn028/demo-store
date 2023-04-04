@@ -14,9 +14,9 @@ public interface InvoiceService {
 
     Invoice getInvoiceById(long id);
 
-    List<Invoice> findByDate(LocalDate date);
+    Page<Invoice> findByDate(int pageNo, int pageSize, String sortField, String sortDir, LocalDate date);
 
-    List<Invoice> findByDateRange(LocalDate start, LocalDate end);
+    Page<Invoice> findByDateRange(int pageNo, int pageSize, String sortField, String sortDir, LocalDate start, LocalDate end);
 
     Page<Invoice> findPaginated(int pageNo, int pageSize, String sortField, String sortDir);
 

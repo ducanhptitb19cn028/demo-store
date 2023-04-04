@@ -18,7 +18,7 @@
     <form th:action="@{/statistic/get-money-statistic}">
         <input type="radio" id="date" name="option" onclick="showSpecificDate()" value="date" checked>Chọn ngày cụ thể:
         <div id="specificDateDiv" style="display: block">
-            <input type="date" name="specificDate">
+            <input type="date" name="specificDate" id="specificDate" required>
         </div>
 
         <br>
@@ -27,9 +27,9 @@
         <br>
         <div id="dateRangeDiv" style="display: none">
             <label>From:</label>
-            <input type="date" name="fromDate">
+            <input type="date" name="fromDate" id="fromDate" required>
             <label>To:</label>
-            <input type="date" name="toDate">
+            <input type="date" name="toDate" id="toDate" required>
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Search</button>
@@ -45,6 +45,12 @@
             document.getElementById("specificDateDiv").style.display = "none";
             document.getElementById("dateRangeDiv").style.display = "block";
         }
+
+        var today = new Date().toISOString().slice(0, 10);
+        var sevenDaysAgo = new Date(new Date().getTime()-(7 * 24 * 60 * 60 * 1000)).toISOString().slice(0, 10);
+        document.getElementById("specificDate").value = today;
+        document.getElementById("fromDate").value = sevenDaysAgo;
+        document.getElementById("toDate").value = today;
     </script>
 </div>
 </body>

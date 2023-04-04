@@ -48,13 +48,17 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public List<Invoice> findByDate(LocalDate date) {
-        return invoiceRepository.findAllByCreateDateEquals(date);
+    public Page<Invoice> findByDate(int pageNo, int pageSize, String sortField, String sortDir, LocalDate date) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.invoiceRepository.findAllByCreateDateEquals(date, pageable);
     }
 
     @Override
-    public List<Invoice> findByDateRange(LocalDate start, LocalDate end) {
-        return invoiceRepository.findAllByCreateDateBetween(start, end);
+    public Page<Invoice> findByDateRange(int pageNo, int pageSize, String sortField, String sortDir, LocalDate start, LocalDate end) {
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return this.invoiceRepository.findAllByCreateDateBetween(start, end, pageable);
     }
 
     @Override
@@ -66,7 +70,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Page<Product> findPaginatedPt(int pageNo, int pageSize, String sortField, @NotNull String sortDir) {
-            Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.productRepository.findAll(pageable);
     }
