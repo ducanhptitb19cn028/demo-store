@@ -31,7 +31,7 @@
                     <td th:text="${product.productId}"></td>
                     <td th:text="${product.productName}"></td>
                     <td th:text="${product.sellingPrice}"></td>
-                    <td><input type="number" th:name="'pId.' + ${product.productId} " th:value="0"></td>
+                    <td><input class="validate" type="number" th:name="'pId.' + ${product.productId} " th:value="0"></td>
                 </tr>
                 </tbody>
             </table>
@@ -39,9 +39,36 @@
         <div>
             <a href="javascript:history.back()" class="btn btn-primary">Go back</a>
 
-            <button type="submit" class="btn btn-info col-2">Save</button>
+            <button type="submit" onclick="return validateForm();" class="btn btn-info col-2">Save</button>
         </div>
     </form>
+
+    <script type="text/javascript">
+        function validateForm() {
+            var inputs = document.getElementsByClassName("validate");
+            var sum = 0;
+            var check = true;
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type === "number") {
+                    sum += parseInt(inputs[i].value);
+                } else {
+                    check = false;
+                }
+            }
+            if (check == false) {
+                alert("hãy nhập đúng dạng số");
+                return false;
+            } else {
+                if (sum > 0) {
+                    return true;
+                } else {
+                    alert("hãy thêm ít nhất 1 sản phẩm");
+                    return false;
+                }
+            }
+        }
+
+    </script>
 </div>
 </body>
 </html>
