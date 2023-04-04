@@ -26,9 +26,6 @@ import java.util.function.Function;
 @Controller
 public class StatisticController {
     @Autowired
-    private HandlerInvoice handlerInvoice;
-
-    @Autowired
     InvoiceService invoiceService;
 
     @GetMapping("")
@@ -47,15 +44,15 @@ public class StatisticController {
     }
 
     @GetMapping("/page/{pageNo}")
-    private String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-                                 @RequestParam("sortField") String sortField,
-                                 @RequestParam("sortDir") String sortDir,
-                                 @RequestParam(value = "option") String option,
-                                 @RequestParam(value = "specificDate") String specificDate,
-                                 @RequestParam(value = "fromDate") String fromDate,
-                                 @RequestParam(value = "toDate") String toDate,
-                                 Model model,
-                                 Map<String, String> params) {
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
+                                @RequestParam(value = "option") String option,
+                                @RequestParam(value = "specificDate") String specificDate,
+                                @RequestParam(value = "fromDate") String fromDate,
+                                @RequestParam(value = "toDate") String toDate,
+                                Model model,
+                                Map<String, String> params) {
         // trả lại dữ liệu
         if (params.size() > 0) {
             option = params.get(Constant.OPTION);

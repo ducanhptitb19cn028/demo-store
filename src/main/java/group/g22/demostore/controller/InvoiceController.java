@@ -52,7 +52,7 @@ public class InvoiceController {
         int pageSize = 5;
         Page<Invoice> page = invoiceService.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<Invoice> invoices = page.getContent();
-
+        model.addAttribute("invoices", invoices);
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
@@ -62,7 +62,6 @@ public class InvoiceController {
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
-        model.addAttribute("invoices", invoices);
         return "invoice_view/invoices";
     }
 
