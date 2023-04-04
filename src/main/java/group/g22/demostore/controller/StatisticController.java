@@ -112,7 +112,7 @@ public class StatisticController {
 
     @GetMapping("/get-product-statistic")
     public String getProductStatistic(Model model) {
-        return findPaginatedPt(1, "productId", "asc", model);
+        return findPaginatedPt(1, "sellNumber", "desc", model);
     }
 
     @GetMapping("/pt/page/{pageNo}")
