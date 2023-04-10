@@ -10,20 +10,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{js/employee.js}"></script>
 </head>
 <body>
 <div th:include="header.html"></div>
 <div class="container">
     <hr>
     <h2>Thêm thông tin nhân viên</h2>
-    <form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="post" align="left">
+    <form name="employeeform" action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="post" align="left">
         <div>
             <label>Tên nhân viên: </label>
             <label>
-                <input type="text" th:field="*{firstName}" placeholder="Họ" class="form-control mb-4 col-4">
+                <input name="fname" type="text" th:field="*{firstName}" placeholder="Họ" class="form-control mb-4 col-4">
             </label>
             <label>
-                <input type="text" th:field="*{lastName}" placeholder="Tên" class="form-control mb-4 col-4">
+                <input name="lname" type="lname" th:field="*{lastName}" placeholder="Tên" class="form-control mb-4 col-4">
             </label>
         </div>
 
@@ -31,7 +32,7 @@
             <label>Giới tính: </label>
             <div th:each="option : ${T(group.g22.demostore.enums.GenderOption).values()}">
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" th:field="*{genderOption}" th:value="${option}" class="custom-control-input">
+                    <input name="gender" type="radio" th:field="*{genderOption}" th:value="${option}" class="custom-control-input">
                     <label class="custom-control-label" th:for="${#ids.prev('genderOption')}"
                            th:text="${option}">option</label>
                 </div>
@@ -40,26 +41,26 @@
         <br>
         <div>
             <label>Email:</label>
-            <input type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4">
+            <input name="email" type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4">
         </div>
 
         <div>
             <label>Ngày sinh:</label>
-            <input type="date" th:field="*{dob}" placeholder="Date of birth" class="yyyy-MM-dd">
+            <input name="date" type="date" th:field="*{dob}" placeholder="Date of birth" class="yyyy-MM-dd" required>
         </div>
         <br>
         <div>
             <label>Địa chỉ: </label>
-            <input type="text" th:field="*{address}" placeholder="Địa chỉ" class="form-control mb-4 col-4">
+            <input name="address" type="text" th:field="*{address}" placeholder="Địa chỉ" class="form-control mb-4 col-4">
         </div>
         <div>
             <label>Căn cước công dân: </label>
-            <input type="text" th:field="*{identityno}" placeholder="Số CCCD" class="form-control mb-4 col-4">
+            <input name="identity" type="text" th:field="*{identityno}" placeholder="Số CCCD" class="form-control mb-4 col-4">
         </div>
         <div class="form-group">
             <label>Dân tộc:</label><br>
-            <select th:field="*{peopleOption}" id="peopleOption" onfocus='this.size=6;' onblur='this.size=0;'
-                    onchange='this.size=1; this.blur();'>
+            <select name="" th:field="*{peopleOption}" id="peopleOption" onfocus='this.size=6;' onblur='this.size=0;'
+                    onchange='this.size=1; this.blur();' required>
                 <option value="">null</option>
                 <option th:each="people :  ${T(group.g22.demostore.enums.PeopleOption).values()}"
                         th:value="${people}" th:text="${people}">option
@@ -70,7 +71,7 @@
         <div class="col-md-4">
             <label th:for="*{images}">Ảnh:</label>
             <input type="file" id="file-input" th:field="*{images}" name="image" accept="image/*"
-                   class="form-control-file" onchange="loadFile(event)">
+                   class="form-control-file" onchange="loadFile(event)" required>
             <img id="employee-img-output"/>
         </div>
         <br>
