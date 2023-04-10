@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Personnel Management System</title>
+    <title>Store Management System</title>
     <link th:href="@{css/main.css}" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" th:src="@{js/main.js}"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,9 +14,9 @@
 <body>
 <div th:include="~{header.html}"></div>
 <div class="container">
-    <h1>Type Product Management System</h1>
+    <h1>Quản lý loại mặt hàng</h1>
     <hr>
-    <h2>Update Type Product</h2>
+    <h2>Thêm loại mặt hàng</h2>
     <form action="#" th:action="@{/type-product/save}" th:object="${typeProduct}" method="post" align="left">
         <input type="hidden" th:field="*{typeProductId}"/>
 
@@ -50,9 +50,9 @@
         </div>
 
         <div>
-            <a th:href="@{/type-product/{id}(id=*{typeProductId})}" class="btn btn-primary">Go back</a>
+            <a th:href="@{/type-product/{id}(id=*{typeProductId})}" class="btn btn-primary">Quay lại</a>
 
-            <button type="submit" class="btn btn-info col-2">Save</button>
+            <button type="submit" class="btn btn-info col-2">Lưu</button>
         </div>
     </form>
 </div>

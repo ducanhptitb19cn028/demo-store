@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Personnel Management System</title>
+    <title>Store Management System</title>
     <link th:href="@{css/main.css}" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" th:src="@{js/main.js}"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -19,21 +19,22 @@
         <thead>
         <th>
             <a th:href="@{'/statistic/pt/page/' + ${currentPage} + '?sortField=productId&sortDir=' + ${reverseSortDir}}">
-                Product Id
+                Mã
             </a></th>
         <th>
             <a th:href="@{'/statistic/pt/page/' + ${currentPage} + '?sortField=productName&sortDir=' + ${reverseSortDir}}">
-                Product Name
+                Tên sản phẩm
             </a></th>
         <th>
-            <a th:href="@{'/statistic/pt/page/' + ${currentPage} + '?sortField=sellingPrice&sortDir='  + ${reverseSortDir}}">Selling
-                Price</a></th>
+            <a th:href="@{'/statistic/pt/page/' + ${currentPage} + '?sortField=sellingPrice&sortDir='  + ${reverseSortDir}}">Giá
+            Bán</a></th>
         <th>
-            <a th:href="@{'/statistic/pt/page/'+ ${currentPage} + '?sortField=sellNumber&sortDir=' + ${reverseSortDir}}">Sell
-                Number</a>
+            <a th:href="@{'/statistic/pt/page/'+ ${currentPage} + '?sortField=sellNumber&sortDir=' + ${reverseSortDir}}">Lượng
+                bán ra</a>
         </th>
         <th>
-            <a th:href="@{'/statistic/pt/page/'+ ${currentPage} + '?sortField=totalRevenue&sortDir=' + ${reverseSortDir}}">Total Revenue</a>
+            <a th:href="@{'/statistic/pt/page/'+ ${currentPage} + '?sortField=totalRevenue&sortDir=' + ${reverseSortDir}}">Tổng
+            thu</a>
         </th>
         </tr>
         </thead>
