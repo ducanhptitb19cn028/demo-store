@@ -16,7 +16,7 @@
 <div class="container my-2">
 
     <div class="d-flex justify-content-between">
-        <h1>Type Product List</h1>
+        <h1>Danh sách loại mặt hàng</h1>
         <a th:href="@{/type-product/new}" class="btn btn-primary align-self-center">Thêm Loại mặt hàng</a>
     </div>
     <table border="1" class="table table-striped table-responsive-md">
@@ -33,8 +33,8 @@
         <tr th:each="typeproduct : ${listTypeProduct}">
             <td th:text="${typeproduct.typeProductCode}"></td>
             <td th:text="${typeproduct.typeProductName}"></td>
-            <td th:text="${typeproduct.typeProductStatus}"></td>
-            <td th:text="${typeproduct.createDate}"></td>
+            <td th:text="${T(group.g22.demostore.enums.TypeProductStatusOption).valueOf(typeproduct.typeProductStatus).getName()}"></td>
+            <td th:text="${#temporals.format(typeproduct.createDate, 'dd/MM/yyyy HH:mm:ss') }"></td>
             <td>
                 <a th:href="@{/type-product/{id}(id=${typeproduct.typeProductId})}" class="btn btn-info">Chi tiết</a>
                 <a th:href="@{/type-product/delete/{id}(id=${typeproduct.typeProductId})}"
