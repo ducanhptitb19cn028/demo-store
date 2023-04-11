@@ -61,25 +61,25 @@
 
             <div class="align-self-center">
                 <a th:if="${currentPage > 1}"
-                   th:href="@{'/statistic/pt/page/' + ${totalPages - totalPages + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Top</a>
-                <span th:unless="${currentPage > 1}">Top</span>
+                   th:href="@{'/statistic/pt/page/' + ${totalPages - totalPages + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Đầu</a>
+                <span th:unless="${currentPage > 1}">Đầu</span>
 
                 <a th:if="${currentPage > 1}"
-                   th:href="@{'/statistic/pt/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
-                <span th:unless="${currentPage > 1}">Previous</span>
+                   th:href="@{'/statistic/pt/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Trước</a>
+                <span th:unless="${currentPage > 1}">Trước</span>
 
                 <a th:if="${currentPage < totalPages}"
-                   th:href="@{'/statistic/pt/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-                <span th:unless="${currentPage < totalPages}">Next</span>
+                   th:href="@{'/statistic/pt/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Sau</a>
+                <span th:unless="${currentPage < totalPages}">Sau</span>
 
                 <a th:if="${currentPage < totalPages}"
-                   th:href="@{'/statistic/pt/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-                <span th:unless="${currentPage < totalPages}">Last</span>
+                   th:href="@{'/statistic/pt/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Cuối</a>
+                <span th:unless="${currentPage < totalPages}">Cuối</span>
             </div>
         </div>
     </div>
     <div>
-        <a th:href="@{/statistic}" class="btn btn-primary">Go back</a>
+        <a th:href="@{/statistic}" class="btn btn-primary">Quay lại</a>
     </div>
 </div>
 </body>

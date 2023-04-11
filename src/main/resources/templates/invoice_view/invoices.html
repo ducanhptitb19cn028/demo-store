@@ -21,9 +21,7 @@
         <th><a th:href="@{'/invoice/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">Mã hóa đơn
         </a></th>
         <th><a th:href="@{'/invoice/page/' + ${currentPage} + '?sortField=createDate&sortDir='  + ${reverseSortDir}}">Ngày tạo</a></th>
-        <th><a th:href="@{'/invoice/page/'+ ${currentPage} + '?sortField=totalAmount&sortDir=' + ${reverseSortDir}}">Total
-            Amount</a>
-        </th>
+        <th><a th:href="@{'/invoice/page/'+ ${currentPage} + '?sortField=totalAmount&sortDir=' + ${reverseSortDir}}">Tổng tiền</a></th>
         </tr>
         </thead>
         <thead>
@@ -47,27 +45,27 @@
 
             <div class="align-self-center">
                 <a th:if="${currentPage > 1}"
-                   th:href="@{'/invoice/page/' + ${totalPages - totalPages + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Top</a>
-                <span th:unless="${currentPage > 1}">Top</span>
+                   th:href="@{'/invoice/page/' + ${totalPages - totalPages + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Đầu</a>
+                <span th:unless="${currentPage > 1}">Đầu</span>
 
                 <a th:if="${currentPage > 1}"
-                   th:href="@{'/invoice/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
-                <span th:unless="${currentPage > 1}">Previous</span>
+                   th:href="@{'/invoice/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Trước</a>
+                <span th:unless="${currentPage > 1}">Trước</span>
 
                 <a th:if="${currentPage < totalPages}"
-                   th:href="@{'/invoice/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-                <span th:unless="${currentPage < totalPages}">Next</span>
+                   th:href="@{'/invoice/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Sau</a>
+                <span th:unless="${currentPage < totalPages}">Sau</span>
 
                 <a th:if="${currentPage < totalPages}"
-                   th:href="@{'/invoice/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-                <span th:unless="${currentPage < totalPages}">Last</span>
+                   th:href="@{'/invoice/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Cuối</a>
+                <span th:unless="${currentPage < totalPages}">Cuối</span>
             </div>
         </div>
     </div>
     <br>
     <div>
         <a th:href="@{/invoice/add-invoice}" class="btn btn-primary">Tạo hoá đơn</a>
-        <a th:href="@{/statistic}" class="btn btn-primary">Go back</a>
+        <a th:href="@{/statistic}" class="btn btn-primary">Quay lại</a>
     </div>
 </div>
 </body>

@@ -12,47 +12,49 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+
+
 <div th:insert="header.html"></div>
 <div class="container my-2">
     <div th:if="${option.equals('date')}">
         <h1 align="center">Bảng danh sách hoá đơn được thống kê trong ngày
-            <td th:text="${specificDate}">
+            <td th:text="${specificDate.substring(8,10) + '-' + specificDate.substring(5,7) + '-' + specificDate.substring(0,4)}"></td>
         </h1>
         <br><br><br>
     </div>
     <div th:unless="${option.equals('date')}" align="center">
         <h1>Bảng danh sách hoá đơn được thống kê từ ngày
-            <td th:text="${fromDate}">
+            <td th:text="${fromDate.substring(8,10) + '-' + fromDate.substring(5,7) + '-' + fromDate.substring(0,4)}"></td>
         </h1>
         <h1>tới ngày
-            <td th:text="${toDate}">
+            <td th:text="${toDate.substring(8,10) + '-' + toDate.substring(5,7) + '-' + toDate.substring(0,4)}"></td>
         </h1>
         <br><br><br>
     </div>
     <div>
-        Total Amount All:
-        <td th:text="${totalAmountAll}"></td>
+<!--        Total Amount All:-->
+<!--        <td th:text="${totalAmountAll}"></td>-->
         <table border="1" class="table table-striped table-responsive-md">
             <thead>
             <th><a th:href="@{'/statistic/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}
                                                                   + '&option=' + ${option}
                                                                   + '&fromDate=' + ${fromDate}
                                                                   + '&toDate=' + ${toDate}
-                                                                  + '&specificDate=' + ${specificDate}}">Invoice Id</a>
+                                                                  + '&specificDate=' + ${specificDate}}">Mã hóa đơn</a>
             </th>
             <th>
                 <a th:href="@{'/statistic/page/' + ${currentPage} + '?sortField=createDate&sortDir='  + ${reverseSortDir}
                                                                   + '&option=' + ${option}
                                                                   + '&fromDate=' + ${fromDate}
                                                                   + '&toDate=' + ${toDate}
-                                                                  + '&specificDate=' + ${specificDate}}">Create Date</a>
+                                                                  + '&specificDate=' + ${specificDate}}">Ngày tạo</a>
             </th>
             <th>
                 <a th:href="@{'/statistic/page/'+ ${currentPage} + '?sortField=totalAmount&sortDir=' + ${reverseSortDir}
                                                                  + '&option=' + ${option}
                                                                  + '&fromDate=' + ${fromDate}
                                                                  + '&toDate=' + ${toDate}
-                                                                 + '&specificDate=' + ${specificDate}}">Total Amount</a>
+                                                                 + '&specificDate=' + ${specificDate}}">Tổng tiền</a>
             </th>
             </tr>
             </thead>
@@ -87,8 +89,8 @@
                                                      + '&option=' + ${option}
                                                      + '&fromDate=' + ${fromDate}
                                                      + '&toDate=' + ${toDate}
-                                                     + '&specificDate=' + ${specificDate}}">Top</a>
-                    <span th:unless="${currentPage > 1}">Top</span>
+                                                     + '&specificDate=' + ${specificDate}}">Đầu</a>
+                    <span th:unless="${currentPage > 1}">Đầu</span>
 
                     <a th:if="${currentPage > 1}"
                        th:href="@{'/statistic/page/' + ${currentPage - 1} + '?sortField=' + ${sortField}
@@ -96,8 +98,8 @@
                                                                           + '&option=' + ${option}
                                                                           + '&fromDate=' + ${fromDate}
                                                                           + '&toDate=' + ${toDate}
-                                                                          + '&specificDate=' + ${specificDate}}">Previous</a>
-                    <span th:unless="${currentPage > 1}">Previous</span>
+                                                                          + '&specificDate=' + ${specificDate}}">Trước</a>
+                    <span th:unless="${currentPage > 1}">Trước</span>
 
                     <a th:if="${currentPage < totalPages}"
                        th:href="@{'/statistic/page/' + ${currentPage + 1} + '?sortField=' + ${sortField}
@@ -105,8 +107,8 @@
                                                                           + '&option=' + ${option}
                                                                           + '&fromDate=' + ${fromDate}
                                                                           + '&toDate=' + ${toDate}
-                                                                          + '&specificDate=' + ${specificDate}}">Next</a>
-                    <span th:unless="${currentPage < totalPages}">Next</span>
+                                                                          + '&specificDate=' + ${specificDate}}">Sau</a>
+                    <span th:unless="${currentPage < totalPages}">Sau</span>
 
                     <a th:if="${currentPage < totalPages}"
                        th:href="@{'/statistic/page/' + ${totalPages} + '?sortField=' + ${sortField}
@@ -114,13 +116,13 @@
                                                                      + '&option=' + ${option}
                                                                      + '&fromDate=' + ${fromDate}
                                                                      + '&toDate=' + ${toDate}
-                                                                     + '&specificDate=' + ${specificDate}}">Last</a>
-                    <span th:unless="${currentPage < totalPages}">Last</span>
+                                                                     + '&specificDate=' + ${specificDate}}">Cuối</a>
+                    <span th:unless="${currentPage < totalPages}">Cuối</span>
                 </div>
             </div>
         </div>
         <div>
-            <a th:href="@{/statistic}" class="btn btn-primary">Go back</a>
+            <a th:href="@{/statistic}" class="btn btn-primary">Quay lại</a>
         </div>
     </div>
 </div>
