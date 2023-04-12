@@ -21,10 +21,10 @@
         <div>
             <label>Tên nhân viên: </label>
             <label>
-                <input name="fname" type="text" th:field="*{firstName}" placeholder="Họ" class="form-control mb-4 col-4">
+                <input name="fname" type="text" th:field="*{firstName}" placeholder="Họ" class="form-control mb-4 col-4" required>
             </label>
             <label>
-                <input name="lname" type="lname" th:field="*{lastName}" placeholder="Tên" class="form-control mb-4 col-4">
+                <input name="lname" type="lname" th:field="*{lastName}" placeholder="Tên" class="form-control mb-4 col-4" required>
             </label>
         </div>
 
@@ -41,7 +41,7 @@
         <br>
         <div>
             <label>Email:</label>
-            <input name="email" type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4">
+            <input name="email" type="text" th:field="*{email}" placeholder="Email" class="form-control mb-4 col-4" required>
         </div>
 
         <div>
