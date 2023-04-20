@@ -9,11 +9,11 @@ import java.util.List;
 public interface TypeProductService {
     Page<TypeProduct> search(Pageable pageable);
 
-    String save(TypeProduct typeProduct);
+    Boolean save(TypeProduct typeProduct);
 
     void delete(Long id);
 
     TypeProduct detail(Long id);
 
-    String update(TypeProduct typeProduct);
+    Boolean update(TypeProduct typeProduct);
 }

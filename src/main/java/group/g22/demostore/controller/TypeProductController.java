@@ -33,7 +33,6 @@ public class TypeProductController {
     }
 
     @GetMapping("/new")
-    @PreAuthorize("hasRole('ADMIN')")
     public String getNewTypeProductForm(Model model) {
         TypeProduct typeProduct = new TypeProduct();
         model.addAttribute("typeProduct", typeProduct);
@@ -42,10 +41,10 @@ public class TypeProductController {
 
     @PostMapping("/save")
     public String saveTypeProduct(@ModelAttribute("typeProduct") TypeProduct typeProduct) {
-        String success = typeProduct.getTypeProductId() == null
+        Boolean success = typeProduct.getTypeProductId() == null
                 ? typeProductService.save(typeProduct)
                 : typeProductService.update(typeProduct);
-        return "redirect:/type-product";
+        return success ? "redirect:/type-product" : "redirect:/error";
     }
 
     @GetMapping("/delete/{id}")

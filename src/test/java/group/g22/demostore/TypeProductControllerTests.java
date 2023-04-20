@@ -103,7 +103,7 @@ class TypeProductControllerTests {
     @Rollback
     void testSave() {
         TypeProduct typeProduct = new TypeProduct();
-        typeProduct.setTypeProductCode("LHH1");
+        typeProduct.setTypeProductCode("LHH1 - 20/3/2023");
         typeProduct.setTypeProductName("Loại hàng hóa 1");
         typeProduct.setTypeProductStatus(1);
         Assert.assertEquals("redirect:/type-product", typeProductController.saveTypeProduct(typeProduct));

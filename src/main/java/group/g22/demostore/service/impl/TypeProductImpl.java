@@ -25,7 +25,7 @@ public class TypeProductImpl implements TypeProductService {
     }
 
     @Override
-    public String save(TypeProduct typeProduct) {
+    public Boolean save(TypeProduct typeProduct) {
         /**Nếu là tạo thì không có id*/
         if (typeProduct.getTypeProductId() == null) {
             typeProduct.setCreateDate(LocalDateTime.now());
@@ -36,7 +36,7 @@ public class TypeProductImpl implements TypeProductService {
             typeProduct.setStopDate(null);
         }
         typeProductRepository.save(typeProduct);
-        return "Create success";
+        return true;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class TypeProductImpl implements TypeProductService {
     }
 
     @Override
-    public String update(TypeProduct typeProduct) {
+    public Boolean update(TypeProduct typeProduct) {
         TypeProduct typeProductUpdate = typeProductRepository.findById(typeProduct.getTypeProductId()).orElseThrow(() -> new RuntimeException());
 
         typeProductUpdate.setTypeProductCode(typeProduct.getTypeProductCode());
@@ -64,7 +64,7 @@ public class TypeProductImpl implements TypeProductService {
         );
 
         typeProductRepository.save(typeProductUpdate);
-        return "Update success";
+        return true;
     }
 
 }
