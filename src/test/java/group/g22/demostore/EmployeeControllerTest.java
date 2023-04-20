@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -119,7 +120,7 @@ public class EmployeeControllerTest {
         Employee employee = new Employee();
         employee.setAddress("Hanoi");
         employee.setId(100L);
-        employee.setDob(Date.valueOf("03/12/2001"));
+        employee.setDob(Date.valueOf(LocalDate.now()));
         employee.setImages("cccd.jpg");
         employee.setEmail("pa@gmail.com");
         employee.setFirstName("Anh");
@@ -128,5 +129,22 @@ public class EmployeeControllerTest {
         employee.setIdentityno("001203424532");
 
         Assert.assertEquals("redirect:/employee", employeeController.saveEmployee(employee));
+    }
+    @Test
+    @Transactional
+    @Rollback
+    void testUpdate() {
+        Employee employee = new Employee();
+        employee.setAddress("Hanoi");
+        employee.setId(100L);
+        employee.setDob(Date.valueOf(LocalDate.now()));
+        employee.setImages("cccd.jpg");
+        employee.setEmail("pa@gmail.com");
+        employee.setFirstName("Anh");
+        employee.setGenderOption("Male");
+        employee.setPeopleOption("Kinh");
+        employee.setIdentityno("001203424532");
+        employeeController.saveEmployee(employee);
+        Assert.assertEquals("employee_view/update_employees", employeeController.showFormUpdate(employee.getId(),model));
     }
 }
