@@ -36,7 +36,6 @@ public class InvoiceController {
     @PostMapping("/save")
     public String saveInvoice(Model model, @RequestParam Map<String, String> params) {
         Invoice invoice = handlerInvoice.createInvoice(params);
-        invoiceService.save(invoice);
         model.addAttribute("invoice", invoice);
         return "invoice_view/create_success";
     }
