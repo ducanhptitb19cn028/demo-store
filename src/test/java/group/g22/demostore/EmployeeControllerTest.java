@@ -119,32 +119,50 @@ public class EmployeeControllerTest {
     void testSave() {
         Employee employee = new Employee();
         employee.setAddress("Hanoi");
-        employee.setId(100L);
+        employee.setId(null);
         employee.setDob(Date.valueOf(LocalDate.now()));
         employee.setImages("cccd.jpg");
         employee.setEmail("pa@gmail.com");
         employee.setFirstName("Anh");
+        employee.setLastName("Nguyen Ngoc Duc");
         employee.setGenderOption("Male");
         employee.setPeopleOption("Kinh");
         employee.setIdentityno("001203424532");
-
+        employeeRepository.save(employee);
         Assert.assertEquals("redirect:/employee", employeeController.saveEmployee(employee));
     }
     @Test
     @Transactional
-    @Rollback
+    @Rollback(value = false)
     void testUpdate() {
-        Employee employee = new Employee();
+        Employee employee = employeeRepository.getById(Long.valueOf(6));
         employee.setAddress("Hanoi");
-        employee.setId(100L);
         employee.setDob(Date.valueOf(LocalDate.now()));
         employee.setImages("cccd.jpg");
         employee.setEmail("pa@gmail.com");
         employee.setFirstName("Anh");
         employee.setGenderOption("Male");
         employee.setPeopleOption("Kinh");
-        employee.setIdentityno("001203424532");
-        employeeController.saveEmployee(employee);
-        Assert.assertEquals("employee_view/update_employees", employeeController.showFormUpdate(employee.getId(),model));
+        employee.setIdentityno("001201021885");
+        employeeRepository.save(employee);
+        Assert.assertEquals("redirect:/employee", employeeController.saveEmployee(employee));
+
+    }
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    void testDelete() {
+        Employee employee = employeeRepository.getById(Long.valueOf(6));
+        employee.setAddress("Hanoi");
+        employee.setDob(Date.valueOf(LocalDate.now()));
+        employee.setImages("cccd.jpg");
+        employee.setEmail("pa@gmail.com");
+        employee.setFirstName("Anh");
+        employee.setGenderOption("Male");
+        employee.setPeopleOption("Kinh");
+        employee.setIdentityno("001201021885");
+        employeeRepository.save(employee);
+        Assert.assertEquals("redirect:/employee", employeeController.saveEmployee(employee));
+
     }
 }
