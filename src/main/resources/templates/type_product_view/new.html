@@ -22,7 +22,7 @@
             <label>Mã: </label>
             <label>
                 <input type="text" th:field="*{typeProductCode}" placeholder="Type Product Code"
-                       class="form-control mb-4 col-4">
+                       class="form-control mb-4 col-4" required>
             </label>
         </div>
 
@@ -30,7 +30,7 @@
             <label>Loại mặt hàng: </label>
             <label>
                 <input type="text" th:field="*{typeProductName}" placeholder="Type Product Name"
-                       class="form-control mb-4 col-4">
+                       class="form-control mb-4 col-4" required>
             </label>
         </div>
 
@@ -39,7 +39,7 @@
             <div th:each="option : ${T(group.g22.demostore.enums.TypeProductStatusOption).values()}">
                 <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" th:field="*{typeProductStatus}" th:value="${option.getValue()}"
-                           class="custom-control-input">
+                           class="custom-control-input" required>
                     <label class="custom-control-label" th:for="${#ids.prev('typeProductStatus')}"
                            th:text="${option.getName()}">option</label>
                 </div>
