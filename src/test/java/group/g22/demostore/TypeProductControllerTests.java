@@ -100,7 +100,7 @@ class TypeProductControllerTests {
 
     @Test
     @Transactional
-    @Rollback(value = false)
+    @Rollback
     void testSave() {
         TypeProduct typeProduct = new TypeProduct();
         typeProduct.setTypeProductCode("LHH1 - 20/3/2023");
@@ -111,7 +111,7 @@ class TypeProductControllerTests {
 
     @Test
     @Transactional
-    @Rollback(value = false)
+    @Rollback
     void testDelete() {
         TypeProduct typeProduct = new TypeProduct();
         typeProduct.setTypeProductCode("LHH1");
