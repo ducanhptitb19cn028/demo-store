@@ -133,9 +133,9 @@ public class EmployeeControllerTest {
     }
     @Test
     @Transactional
-    @Rollback(value = false)
+    @Rollback
     void testUpdate() {
-        Employee employee = employeeRepository.getById(Long.valueOf(6));
+        Employee employee = employeeRepository.getById(Long.valueOf(11));
         employee.setAddress("Hanoi");
         employee.setDob(Date.valueOf(LocalDate.now()));
         employee.setImages("cccd.jpg");
@@ -150,9 +150,9 @@ public class EmployeeControllerTest {
     }
     @Test
     @Transactional
-    @Rollback(value = false)
+    @Rollback
     void testDelete() {
-        Employee employee = employeeRepository.getById(Long.valueOf(6));
+        Employee employee = employeeRepository.getById(Long.valueOf(11));
         employee.setAddress("Hanoi");
         employee.setDob(Date.valueOf(LocalDate.now()));
         employee.setImages("cccd.jpg");
