@@ -8,45 +8,58 @@ import group.g22.demostore.repository.EmployeeRepository;
 import group.g22.demostore.service.EmployeeService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 
 @SpringBootTest
 @Log4j2
 public class EmployeeControllerTest {
     @Autowired
+    @InjectMocks
     private EmployeeController employeeController;
     @Autowired
     private ApplicationContext context;
+    @Mock
+    private Page<Employee> employeePage;
     @Autowired
     private EmployeeRepository employeeRepository;
     @MockBean
     private EmployeeService employeeService;
+    private MockMvc mockMvc;
     private Model model = new Model() {
         @Override
         public Model addAttribute(String attributeName, Object attributeValue) {
@@ -135,7 +148,7 @@ public class EmployeeControllerTest {
     @Transactional
     @Rollback
     void testUpdate() {
-        Employee employee = employeeRepository.getById(Long.valueOf(11));
+        Employee employee = employeeRepository.getById(Long.valueOf(2));
         employee.setAddress("Hanoi");
         employee.setDob(Date.valueOf(LocalDate.now()));
         employee.setImages("cccd.jpg");
@@ -152,7 +165,7 @@ public class EmployeeControllerTest {
     @Transactional
     @Rollback
     void testDelete() {
-        Employee employee = employeeRepository.getById(Long.valueOf(11));
+        Employee employee = employeeRepository.getById(Long.valueOf(2));
         employee.setAddress("Hanoi");
         employee.setDob(Date.valueOf(LocalDate.now()));
         employee.setImages("cccd.jpg");
@@ -164,5 +177,9 @@ public class EmployeeControllerTest {
         employeeRepository.delete(employee);
         Assert.assertEquals("redirect:/employee", employeeController.deleteEmployee(employee.getId()));
 
+    }
+    @Before
+    public void setup() {
+        mockMvc = MockMvcBuilders.standaloneSetup(employeeController).build();
     }
 }

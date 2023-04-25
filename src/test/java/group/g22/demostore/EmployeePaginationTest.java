@@ -64,4 +64,58 @@ public class EmployeePaginationTest {
         verify(model).addAttribute(eq("listEmployees"), eq(employees));
         assertEquals("employee", viewName);
     }
+    @Test
+    public void testFindPaginatedlastname() {
+        // Arrange
+        int pageNo = 0;
+        String sortField = "lastName";
+        String sortDir = "asc";
+        int pageSize = 5;
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1L, "John", "Doe", "john.doe@example.com", Date.valueOf(LocalDate.now()), "123 Main St", "Male", "Single", "123456789", "image1.png"));
+        employees.add(new Employee(2L, "Jane", "Doe", "jane.doe@example.com", Date.valueOf(LocalDate.now()), "456 Second St", "Female", "Married", "987654321", "image2.png"));
+        Page<Employee> page = new PageImpl<>(employees);
+        when(employeeService.findPaginated(pageNo, pageSize, sortField, sortDir)).thenReturn(page);
+
+        // Act
+        String viewName = employeeController.findPaginated(pageNo, sortField, sortDir, model);
+
+        // Assert
+        verify(employeeService).findPaginated(pageNo, pageSize, sortField, sortDir);
+        verify(model).addAttribute(eq("currentPage"), eq(pageNo));
+        verify(model).addAttribute(eq("totalPages"), eq(page.getTotalPages()));
+        verify(model).addAttribute(eq("totalItems"), eq(page.getTotalElements()));
+        verify(model).addAttribute(eq("sortField"), eq(sortField));
+        verify(model).addAttribute(eq("sortDir"), eq(sortDir));
+        verify(model).addAttribute(eq("reverseSortDir"), eq("desc"));
+        verify(model).addAttribute(eq("listEmployees"), eq(employees));
+        assertEquals("employee", viewName);
+    }
+    @Test
+    public void testFindPaginatedemail() {
+        // Arrange
+        int pageNo = 0;
+        String sortField = "email";
+        String sortDir = "asc";
+        int pageSize = 5;
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1L, "John", "Doe", "john.doe@example.com", Date.valueOf(LocalDate.now()), "123 Main St", "Male", "Single", "123456789", "image1.png"));
+        employees.add(new Employee(2L, "Jane", "Doe", "jane.doe@example.com", Date.valueOf(LocalDate.now()), "456 Second St", "Female", "Married", "987654321", "image2.png"));
+        Page<Employee> page = new PageImpl<>(employees);
+        when(employeeService.findPaginated(pageNo, pageSize, sortField, sortDir)).thenReturn(page);
+
+        // Act
+        String viewName = employeeController.findPaginated(pageNo, sortField, sortDir, model);
+
+        // Assert
+        verify(employeeService).findPaginated(pageNo, pageSize, sortField, sortDir);
+        verify(model).addAttribute(eq("currentPage"), eq(pageNo));
+        verify(model).addAttribute(eq("totalPages"), eq(page.getTotalPages()));
+        verify(model).addAttribute(eq("totalItems"), eq(page.getTotalElements()));
+        verify(model).addAttribute(eq("sortField"), eq(sortField));
+        verify(model).addAttribute(eq("sortDir"), eq(sortDir));
+        verify(model).addAttribute(eq("reverseSortDir"), eq("desc"));
+        verify(model).addAttribute(eq("listEmployees"), eq(employees));
+        assertEquals("employee", viewName);
+    }
 }
