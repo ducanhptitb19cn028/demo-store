@@ -161,8 +161,8 @@ public class EmployeeControllerTest {
         employee.setGenderOption("Male");
         employee.setPeopleOption("Kinh");
         employee.setIdentityno("001201021885");
-        employeeRepository.save(employee);
-        Assert.assertEquals("redirect:/employee", employeeController.saveEmployee(employee));
+        employeeRepository.delete(employee);
+        Assert.assertEquals("redirect:/employee", employeeController.deleteEmployee(employee.getId()));
 
     }
 }

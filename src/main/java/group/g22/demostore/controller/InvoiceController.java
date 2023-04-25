@@ -7,6 +7,7 @@ import group.g22.demostore.service.InvoiceService;
 import group.g22.demostore.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("invoice")
+@PreAuthorize("hasRole('ADMIN')")
 public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
